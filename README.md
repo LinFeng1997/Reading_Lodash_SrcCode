@@ -6,6 +6,8 @@
 
 ## 文章链接
 1. lodash基础篇
+	1.1 [lodash代码结构]()
+	1.1 [lodash命名]()
 2. lodash集合篇
 2. lodash数组篇
 2. lodash对象篇
@@ -16,7 +18,7 @@
 
 
 ## 感谢
-[undersercore 源码分析](https://www.gitbook.com/book/yoyoyohamapi/undersercore-analysis/details)
+[undersercore 源码分析](https://www.gitbook.com/book/yoyoyohamapi/undersercore-analysis/details)给了我启发
 
 # Reading_Lodash_SrcCode
 Record the experience of reading the lodash source code
