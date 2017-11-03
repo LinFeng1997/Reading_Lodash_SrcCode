@@ -28,9 +28,10 @@ export default cloneDeep
 
 不过，新版lodash本身源码并没有_对象，这个挂载的过程交给了lodash-cli去完成，。这样，使用者可以根据自己的需要灵活定制打包出来的lodash。
 
-不过我们可以看看build之后的core版本的_对象是怎么来的：
+其实，无论是什么情况，\_是引用了代码中的lodash对象，然后根据情况暴露出去：
 ![\_对象的来源-根据core版本的3806-3829行代码逻辑绘出](../assets/mount_lodash_flowchart.png)
-其实我们发现，无论是什么情况，\_最终还是引用了代码中的lodash对象，那这个lodash对象怎么来的呢？
+
+那么这个lodash对象怎么来的呢？
 //Todo:分析lodash对象
 
 ## 执行环境判断
