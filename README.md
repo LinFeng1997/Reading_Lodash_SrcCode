@@ -7,13 +7,16 @@
 ## 文章链接
 1. lodash基础篇
 	1.1 [lodash代码结构](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_structure.md)
-	1.1 [lodash命名]()
+	1.2 [lodash命名]()
+2. lodash编程范式篇
+	//迭代和iterate
+	//OO和继承
+	//借力生力
 2. lodash集合篇
 2. lodash数组篇
 2. lodash对象篇
 2. lodash函数篇
 2. lodash工具篇
-2. lodash编程范式篇
 
 
 

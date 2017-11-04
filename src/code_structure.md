@@ -17,6 +17,7 @@ export default cloneDeep
 }.call(this))
 ```
 这样做实际上就一个目的：**降低复杂度**
+
 主要体现在这几个方面：
 1. 对代码进行封装，隐藏了某个功能实际的细节，从而对外只暴露API，不会污染全局作用域。
 还是以cloneDeep为例，它对于使用者来说隐藏了深拷贝的细节，我们只需要知道执行cloneDeep(obj)这段代码就会给我们一个obj的深拷贝对象。
@@ -26,9 +27,9 @@ export default cloneDeep
 ## 全局挂载对象_
 \_对象原来是用来标识underscore全局对象的，但是lodash是基于underscore的库，所以为了减少使用者的学习成本和迎合使用习惯，同样也是用lodash来作为挂载各种工具方法的全局对象。
 
-不过，新版lodash本身源码并没有_对象，这个挂载的过程交给了lodash-cli去完成，。这样，使用者可以根据自己的需要灵活定制打包出来的lodash。
+不过，新版lodash本身源码并没有_对象，这个挂载的过程交给了lodash-cli去完成。这样，使用者可以根据自己的需要灵活定制打包出来的lodash。
 
-其实，无论是什么情况，\_是引用了代码中的lodash对象，然后根据情况暴露出去：
+其实，无论是什么情况，\_都是引用了代码中的lodash对象，然后根据情况采用不同的模块规范暴露出去：
 ![\_对象的来源-根据core版本的3806-3829行代码逻辑绘出](../assets/mount_lodash_flowchart.png)
 
 那么这个lodash对象怎么来的呢？
@@ -55,6 +56,8 @@ var freeModule = freeExports && typeof module == 'object' && module && !module.n
 
 ```
 ## 层次划分
-分为内部函数和公共函数层，这个很好区分，内部函数的注释会有一个@private标记，并且没有用例，顾名思义就是私有函数，公共函数就是平时大家用到的那些函数。
+lodash的代码层次很简洁：只是分为内部函数和公共函数层。
+
+内部函数的注释中会有一个@private标记，并且没有用例，顾名思义就是私有函数。公共函数就是平时大家用到的那些函数，比如chain/sortBy/groupBy等。
 
 
