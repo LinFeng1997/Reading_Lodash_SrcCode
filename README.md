@@ -9,11 +9,14 @@
 1. lodash概览篇
 
 	1.1 [lodash代码结构](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_structure.md)
-	1.2 [lodash命名](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_name.md)
+	1.2 [lodash代码命名](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_name.md)
+
 2. lodash编程范式篇
+
 	2.1 函数式编程
 	2.2 面向对象编程
 	2.3 原型链
+
 2. lodash集合篇
 2. lodash数组篇
 2. lodash对象篇
@@ -43,4 +46,4 @@ Record the experience of reading the lodash source code
 
 
 ## Thanks
-[undersercore 源码分析](https://www.gitbook.com/book/yoyoyohamapi/undersercore-analysis/details)
+感谢[undersercore源码分析](https://www.gitbook.com/book/yoyoyohamapi/undersercore-analysis/details)的启发
