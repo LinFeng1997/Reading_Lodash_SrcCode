@@ -38,7 +38,7 @@ function lodash(value) {
 	return value instanceof LodashWrapper ? value : new LodashWrapper(value);
 }
 ```
-这个函数同时也是一个对象，所以它才是最初的载体。从这个lodash中我们能发现一个很重要的函数：LodashWrapper
+这个函数同时也是一个对象，所以它才是最初的载体。从这个lodash中我们能发现一个很重要的构造函数：LodashWrapper
 ```
 function LodashWrapper(value, chainAll) {
 	this.__wrapped__ = value;
