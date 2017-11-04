@@ -47,7 +47,7 @@ function LodashWrapper(value, chainAll) {
 }
 
 ```
-LodashWrapper做了什么事情呢？它把一个正常的js数据包装成lodash抽象数据结构，这个ADT由__wrapped__(被包装者)、__actions__(行为)、__chain__(支持链)组成，从而让lodash对象拥有内聚的、明确的职责。
+LodashWrapper做了什么事情呢？它把一个正常的js数据包装成一个抽象数据结构，这个ADT由\_\_wrapped\_\_(被包装者)、\_\_actions\_\_(行为)、\_\_chain\_\_(支持链)组成，从而让此lodash包装对象拥有内聚的、明确的职责。
 
 最后，将各种方法挂载到lodash对象或原型上去：
 ```
