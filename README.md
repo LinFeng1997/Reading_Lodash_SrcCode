@@ -3,6 +3,7 @@
 
 ## lodash版本
 [lodash v4.17.4](https://github.com/lodash/lodash) 
+>注明：此系列文章例子多来源于core版本，少量来自full版本，来自full版本的例子会标明
 
 ## 文章链接
 1. lodash基础篇

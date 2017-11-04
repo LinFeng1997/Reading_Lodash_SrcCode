@@ -32,8 +32,51 @@ export default cloneDeep
 其实，无论是什么情况，\_都是引用了代码中的lodash对象，然后根据情况采用不同的模块规范暴露出去：
 ![\_对象的来源-根据core版本的3806-3829行代码逻辑绘出](../assets/mount_lodash_flowchart.png)
 
-那么这个lodash对象怎么来的呢？
-//Todo:分析lodash对象
+那么这个lodash对象怎么来的呢？其实它是一个函数。为什么会被设计成一个函数对象呢？当然是方便链式调用了，这个后期会叙述。
+```
+function lodash(value) {
+	return value instanceof LodashWrapper ? value : new LodashWrapper(value);
+}
+```
+这个函数同时也是一个对象，所以它才是最初的载体。从这个lodash中我们能发现一个很重要的函数：LodashWrapper
+```
+function LodashWrapper(value, chainAll) {
+	this.__wrapped__ = value;
+	this.__actions__ = [];
+	this.__chain__ = !!chainAll;
+}
+
+```
+LodashWrapper做了什么事情呢？它把一个正常的js数据包装成lodash抽象数据结构，这个ADT由__wrapped__(被包装者)、__actions__(行为)、__chain__(支持链)组成，从而让lodash对象拥有内聚的、明确的职责。
+
+最后，将各种方法挂载到lodash对象或原型上去：
+```
+//直接挂载示例
+lodash.assignIn = assignIn;
+lodash.before = before;
+lodash.bind = bind;
+lodash.chain = chain;
+
+//原型挂载示例
+mixin(lodash, lodash);
+
+lodash.prototype.toJSON = lodash.prototype.valueOf = lodash.prototype.value = wrapperValue;
+```
+这样就得到了我们最终的lodash对象，至于挂载的细节我将会在编程范式那里叙述。
+
+### 兼容其他_
+当有\_对象冲突问题时怎么办？比如同时引入underscore和lodash时的\_的时候。这时候的关键在一个函数身上：noConflict
+```
+//用例：var lodash = _.noConflict();
+var oldDash = root._;
+function noConflict() {
+	if (root._ === this) {
+	  root._ = oldDash;
+	}
+	return this;
+}
+```
+我们发现\_对象的控制权被交给了另一个对象，当前的this(也就是lodash对象)作为函数返回值返回，用例中使用一个新的lodash变量去引用它，这样_和lodash就可以兼容了。
 
 ## 执行环境判断
 为了在nodejs环境下和浏览器环境下都可以正常使用，lodash会对执行环境进行判断，从而把_对象挂载到全局作用域上去。
@@ -55,6 +98,7 @@ var freeExports = typeof exports == 'object' && exports && !exports.nodeType && 
 var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
 
 ```
+这里在判断浏览器环境的时候目标是self对象而不是window，是因为self在不具有窗口的上下文环境中比如Web Worker中也是适用的。
 ## 层次划分
 lodash的代码层次很简洁：只是分为内部函数和公共函数层。
 
