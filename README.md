@@ -6,13 +6,14 @@
 >注明：此系列文章例子多来源于core版本，少量来自full版本，来自full版本的例子会标明
 
 ## 文章链接
-1. lodash基础篇
+1. lodash概览篇
+
 	1.1 [lodash代码结构](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_structure.md)
-	1.2 [lodash命名]()
+	1.2 [lodash命名](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_name.md)
 2. lodash编程范式篇
-	//迭代和iterate
-	//OO和继承
-	//借力生力
+	2.1 函数式编程
+	2.2 面向对象编程
+	2.3 原型链
 2. lodash集合篇
 2. lodash数组篇
 2. lodash对象篇
