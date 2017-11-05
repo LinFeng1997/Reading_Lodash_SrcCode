@@ -26,7 +26,7 @@
 
 
 ## 感谢
-[undersercore 源码分析](https://www.gitbook.com/book/yoyoyohamapi/undersercore-analysis/details)给了我启发
+[undersercore源码分析](https://www.gitbook.com/book/yoyoyohamapi/undersercore-analysis/details)的启发
 
 # Reading_Lodash_SrcCode
 Record the experience of reading the lodash source code
@@ -46,4 +46,4 @@ Record the experience of reading the lodash source code
 
 
 ## Thanks
-感谢[undersercore源码分析](https://www.gitbook.com/book/yoyoyohamapi/undersercore-analysis/details)的启发
+Thanks for[undersercore源码分析](https://www.gitbook.com/book/yoyoyohamapi/undersercore-analysis/details)enlighten
