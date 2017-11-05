@@ -34,9 +34,20 @@ Record the experience of reading the lodash source code
 ## Lodash Version
 
 [lodash v4.17.4](https://github.com/lodash/lodash) 
+>Notes: this examples of articles is mostly from the core version,some comes from full version, and examples from full will be highlighted
 
 ## Article Links
-1. lodash foundation
+1. lodash overview
+
+	1.1 [lodash code structure](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_structure.md)
+	1.2 [lodash code name](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_name.md)
+
+2. lodash programming paradigm
+	
+	2.1 functional programming
+	2.2 object-oriented programming
+	2.3 prototype link
+
 2. lodash collection
 2. lodash array
 2. lodash object
@@ -46,4 +57,4 @@ Record the experience of reading the lodash source code
 
 
 ## Thanks
-Thanks for[undersercore源码分析](https://www.gitbook.com/book/yoyoyohamapi/undersercore-analysis/details)enlighten
+Thanks for [undersercore源码分析](https://www.gitbook.com/book/yoyoyohamapi/undersercore-analysis/details) enlighten
