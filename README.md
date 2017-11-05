@@ -9,11 +9,13 @@
 1. lodash概览篇
 
 	1.1 [lodash代码结构](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_structure.md)
+
 	1.2 [lodash代码命名](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_name.md)
 
 2. lodash编程范式篇
 
 	2.1 [函数式编程](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/fp.md)
+
 	2.2 面向对象编程
 	2.3 原型链
 
@@ -34,18 +36,21 @@ Record the experience of reading the lodash source code
 ## Lodash Version
 
 [lodash v4.17.4](https://github.com/lodash/lodash) 
->Notes: this examples of articles is mostly from the core version,some comes from full version, and examples from full will be highlighted
+>Notes: this examples of articles is mostly from the core version,some comes from full version, and examples from full will be highlighted.
 
 ## Article Links
 1. lodash overview
 
 	1.1 [lodash code structure](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_structure.md)
+
 	1.2 [lodash code name](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_name.md)
 
 2. lodash programming paradigm
 	
-	2.1 functional programming
+	2.1 [functional programming](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/fp.md)
+
 	2.2 object-oriented programming
+
 	2.3 prototype link
 
 2. lodash collection
