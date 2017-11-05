@@ -16,8 +16,9 @@
 
 	2.1 [函数式编程](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/fp.md)
 
-	2.2 面向对象编程
-	2.3 原型链
+	2.2 [面向对象编程](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/oop.md)
+	
+	2.3 [原型编程](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/proto.md)
 
 2. lodash集合篇
 2. lodash数组篇
@@ -49,9 +50,9 @@ Record the experience of reading the lodash source code
 	
 	2.1 [functional programming](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/fp.md)
 
-	2.2 object-oriented programming
+	2.2 object-oriented programming(https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/oop.md)
 
-	2.3 prototype link
+	2.3 proto programming(https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/proto.md)
 
 2. lodash collection
 2. lodash array

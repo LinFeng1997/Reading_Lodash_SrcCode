@@ -2,6 +2,6 @@
 
 ## 函数式编程简介
 
-## iteratee
+## 迭代者iteratee
 
 ## 链式调用
