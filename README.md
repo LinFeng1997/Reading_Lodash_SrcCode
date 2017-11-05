@@ -13,7 +13,7 @@
 
 2. lodash编程范式篇
 
-	2.1 函数式编程(https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/fp.md)
+	2.1 [函数式编程](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/fp.md)
 	2.2 面向对象编程
 	2.3 原型链
 
