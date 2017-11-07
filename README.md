@@ -12,6 +12,8 @@
 
 	1.2 [lodash代码命名](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_name.md)
 
+	1.3 [lodash代码注释](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_comments.md)
+
 2. lodash编程范式篇
 
 	2.1 [函数式编程](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/fp.md)
@@ -45,6 +47,8 @@ Record the experience of reading the lodash source code
 	1.1 [lodash code structure](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_structure.md)
 
 	1.2 [lodash code name](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_name.md)
+
+	1.3 [lodash code comments](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/code_comments.md)
 
 2. lodash programming paradigm
 	
