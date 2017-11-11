@@ -22,11 +22,11 @@
 	
 	2.3 [原型编程](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/proto.md)
 
+2. lodash工具篇
 2. lodash集合篇
 2. lodash数组篇
 2. lodash对象篇
 2. lodash函数篇
-2. lodash工具篇
 
 
 
@@ -58,11 +58,11 @@ Record the experience of reading the lodash source code
 
 	2.3 [proto programming](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/proto.md)
 
+2. lodash util
 2. lodash collection
 2. lodash array
 2. lodash object
 2. lodash function
-2. lodash util
 2. lodash programming paradigm
 
 

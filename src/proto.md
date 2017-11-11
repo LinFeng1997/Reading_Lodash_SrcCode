@@ -60,9 +60,12 @@ var propertyIsEnumerable = objectProto.propertyIsEnumerable;
 
 // 批量委托
 baseEach(['pop', 'join', 'replace', 'reverse', 'split', 'push', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
+	//检测函数是否属于String
 	var func = (/^(?:replace|split)$/.test(methodName) ? String.prototype : arrayProto)[methodName],
-	  chainName = /^(?:push|sort|unshift)$/.test(methodName) ? 'tap' : 'thru',
-	  retUnwrapped = /^(?:pop|join|replace|shift)$/.test(methodName);
+	//检测函数是否可以链式调用
+	chainName = /^(?:push|sort|unshift)$/.test(methodName) ? 'tap' : 'thru',
+	//检测函数是否属于lodash未包装的
+	retUnwrapped = /^(?:pop|join|replace|shift)$/.test(methodName);
 
 	lodash.prototype[methodName] = function() {
 	  var args = arguments;
@@ -79,3 +82,4 @@ baseEach(['pop', 'join', 'replace', 'reverse', 'split', 'push', 'shift', 'sort',
 });
 ```
 我们可以看出lodash主要是把它的一些方法委托给Object和Array的原型了。其中有一个一个委托的，也有批量委托的。
+//Todo:具体分析批量挂载
