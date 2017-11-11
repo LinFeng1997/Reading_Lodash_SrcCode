@@ -32,7 +32,7 @@ export default cloneDeep
 其实，无论是什么情况，\_都是引用了代码中的lodash对象，然后根据情况采用不同的模块规范暴露出去：
 ![\_对象的来源-根据core版本的3806-3829行代码逻辑绘出](../assets/mount_lodash_flowchart.png)
 
-那么这个lodash对象怎么来的呢？其实它是一个函数。为什么会被设计成一个函数对象呢？当然是方便链式调用了，这个后期会叙述。
+那么这个lodash对象怎么来的呢？其实它是一个函数。为什么会被设计成一个函数对象呢？当然是方便链式调用了，这个在2.1中会叙述。
 ```
 function lodash(value) {
 	return value instanceof LodashWrapper ? value : new LodashWrapper(value);
@@ -102,6 +102,33 @@ var freeModule = freeExports && typeof module == 'object' && module && !module.n
 ## 层次划分
 lodash的代码层次很简洁：只是分为内部函数和公共函数层。
 
-内部函数的注释中会有一个@private标记，并且没有用例，顾名思义就是私有函数。公共函数就是平时大家用到的那些函数，比如chain/sortBy/groupBy等。
+内部函数的注释中会有一个@private标记，并且没有用例，顾名思义就是私有函数。举个例子：baseFindIndex
+```
+function baseFindIndex(array, predicate, fromIndex, fromRight) {
+	var length = array.length,
+	  index = fromIndex + (fromRight ? 1 : -1);
 
+	while ((fromRight ? index-- : ++index < length)) {
+	  if (predicate(array[index], index, array)) {
+	    return index;
+	  }
+	}
+	return -1;
+}
+```
+
+公共函数就是平时大家用到的那些函数，比如findIndex，其他的还有chain/sortBy/groupBy等。
+```
+function findIndex(array, predicate, fromIndex) {
+	var length = array == null ? 0 : array.length;
+	if (!length) {
+	  return -1;
+	}
+	var index = fromIndex == null ? 0 : toInteger(fromIndex);
+	if (index < 0) {
+	  index = nativeMax(length + index, 0);
+	}
+	return baseFindIndex(array, baseIteratee(predicate, 3), index);
+}
+```
 

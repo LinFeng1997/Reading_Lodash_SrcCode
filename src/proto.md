@@ -83,3 +83,6 @@ baseEach(['pop', 'join', 'replace', 'reverse', 'split', 'push', 'shift', 'sort',
 ```
 我们可以看出lodash主要是把它的一些方法委托给Object和Array的原型了。其中有一个一个委托的，也有批量委托的。
 //Todo:具体分析批量挂载
+
+## 原型挂载
+//Todo:分析原型挂载函数mixin
