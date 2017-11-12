@@ -166,7 +166,7 @@ var test = _([1, 2, 3])
 .value();
 // => [1,2,2]
 ```
-<img src="./assets/proto.png" alt="">
+<img src="../assets/proto.png" alt="">
 可以看到，这个时候func对应的push其实就是Array.prototype.push
 
 ## 原型挂载
@@ -177,7 +177,7 @@ var test = _([1, 2, 3])
 debugger
 mixin(lodash, lodash)
 ```
-<img src="./assets/proto-mixin.png" alt="">
+<img src="../assets/proto-mixin.png" alt="">
 可以看出，mixin先把object的键获取到，然后把source里对应这些键的方法名也获取到。
 
 这里有一个判断：当只传了两个参数的时候，实际上是传了object是this，source是第一个参数，options是第二个参数。
@@ -191,7 +191,7 @@ if (options == null &&
   methodNames = baseFunctions(source, keys(source));
 }
 ```
-<img src="./assets/proto-mixin2.png" alt="">
+<img src="../assets/proto-mixin2.png" alt="">
 
 然后开始遍历方法名，处理这些方法的\_\_chain\_\_、\_\_actions\_\_、\_\_wrapped\_\_，将这些方法挂载到object.prototype上，在我们这个例子中就是lodash.prototype上。
 
