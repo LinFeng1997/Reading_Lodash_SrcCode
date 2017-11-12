@@ -1,13 +1,12 @@
 # lodash中的函数式编程思想
 
 ## 函数式编程简介
-这是lodash最突出的编程范式，为什么这么说呢？首先让我们看看函数式编程有什么特点：函数是一等公民，即可以当参数传递也可以当结果返回。
-//Todo:完善函数式编程概念
+这是lodash最突出的编程范式，为什么这么说呢？首先让我们看看函数式编程有什么特点：函数是一等公民，即可以当参数传递也可以当结果返回，它和一个对象是等价的，只不过可以执行。
 
-函数式编程思想在lodash里具体的体现主要有两点：使得集合可迭代和可链式调用无副作用的函数。
+而函数式编程思想在lodash里具体的体现主要有两点：使得集合可迭代和可链式调用无副作用的函数。
 
 ## 迭代者iteratee
-lodash(5.0版本以前)能够让迭代函数同时拥有遍历数组和对象的能力，这一切来源于一个函数：baseIteratee	
+lodash**(5.0版本以前)**能够让迭代函数同时拥有遍历数组和对象的能力，这一切来源于一个函数：baseIteratee	
 ```
 function baseIteratee(func) {
 	if (typeof func == 'function') {
@@ -80,7 +79,7 @@ _.filter(users, 'active');
 // => objects for ['barney']
 ```
 
-every/some/forEach/reduce/sortBy等函数同样使用这种方法包装迭代者
+every/some/forEach/reduce/sortBy等函数同样使用这种方法包装迭代者。
 
 ## 链式调用
 函数式编程另一大特点：函数都是无副作用的
@@ -95,5 +94,4 @@ function chain(value) {
 ```
 它把一个普通的值包装成lodash对象，从而拥有lodash的各种方法，自然就可以链式调用了，这和jq等库的链式调用有异曲同工之妙。
 
-这在函数式编程里称为容器。
-//Todo:完善容器介绍
+这个包装函数在函数式编程里称为Monad。ES6中的Promise其实也是一种Monad。

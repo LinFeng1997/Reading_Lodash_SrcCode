@@ -45,10 +45,10 @@ function object() {}
 	};
 }());
 ```
-可以看出如果当前环境不支持Object.create的话lodash也会polyfill一个
+可以看出如果当前环境不支持Object.create的话lodash也会polyfill一个。
 
 ## 委托
-很多lodash上的方法其实是委托JS原生API来做
+很多lodash上的方法其实是委托JS原生API来做，例如Array.prototype、Object.prototype和String.prototype
 
 ```
 var arrayProto = Array.prototype,
@@ -60,16 +60,16 @@ var propertyIsEnumerable = objectProto.propertyIsEnumerable;
 
 // 批量委托
 baseEach(['pop', 'join', 'replace', 'reverse', 'split', 'push', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
-	//检测函数是否属于String
+	//检测String.proto上是否有该函数
 	var func = (/^(?:replace|split)$/.test(methodName) ? String.prototype : arrayProto)[methodName],
-	//检测函数是否可以链式调用
+	//函数是否适用于tap拦截器
 	chainName = /^(?:push|sort|unshift)$/.test(methodName) ? 'tap' : 'thru',
-	//检测函数是否属于lodash未包装的
+	//函数是否属于lodash未包装的
 	retUnwrapped = /^(?:pop|join|replace|shift)$/.test(methodName);
 
 	lodash.prototype[methodName] = function() {
 	  var args = arguments;
-	  //未包装的方法
+	  //未包装且不支持链式调用的方法
 	  if (retUnwrapped && !this.__chain__) {
 	    var value = this.value();
 	    return func.apply(isArray(value) ? value : [], args);
@@ -82,7 +82,120 @@ baseEach(['pop', 'join', 'replace', 'reverse', 'split', 'push', 'shift', 'sort',
 });
 ```
 我们可以看出lodash主要是把它的一些方法委托给Object和Array的原型了。其中有一个一个委托的，也有批量委托的。
-//Todo:具体分析批量挂载
+
+官方文档在_(value)下面说了这样一段话：
+```
+In addition to lodash methods, wrappers have Array and String methods.
+
+The wrapper Array methods are:
+concat, join, pop, push, shift, sort, splice, and unshift
+
+The wrapper String methods are:
+replace and split
+
+The wrapper methods that support shortcut fusion are:
+//省略
+
+The chainable wrapper methods are:
+//省略
+
+The wrapper methods that are not chainable by default are:
+//省略
+```
+什么意思呢？就是使用_()把一个非lodash对象，比如数组包装成lodash对象后，它拥有的若干方法是委托给Array和String的。
+
+这里牵扯到一个chainName变量和一个value方法。
+
+先来说chainName，它可能为两个值：tap或者thru(即through缩写)
+```
+function tap(value, interceptor) {
+	interceptor(value);
+	return value;
+}
+
+function thru(value, interceptor) {
+	return interceptor(value);
+}
+```
+我们可以观察到，这两个函数都是传入一个值和一个拦截器函数，只不过区别是在拦截器处理完这个值后，tap返回的是改变后的值，而thur返回拦截器函数的返回值。
+举个官方例子：
+```
+_([1, 2, 3])
+ .tap(function(array) {
+// Mutate input array.
+   array.pop();
+ })
+ .reverse()
+ .value();
+// => [2, 1]
+
+_('  abc  ')
+ .chain()
+ .trim()
+ .thru(function(value) {
+   return [value];
+ })
+ .value();
+// => ['abc']
+```
+所以实际上这两个函数的区别就在于tap适用于没有return的函数，thru适用于有return的函数。而pop、unshift、sort是直接改变数组的，所以它们适用于tap。
+
+value方法是lodash原型上挂载的一个方法，用来返回被包装者的真正值。
+```
+lodash.prototype.value = wrapperValue;
+
+function wrapperValue() {
+	return baseWrapperValue(this.__wrapped__, this.__actions__);	
+}
+
+function baseWrapperValue(value, actions) {
+	var result = value;
+	return reduce(actions, function(result, action) {
+	  return action.func.apply(action.thisArg, arrayPush([result], action.args));
+	}, result);
+}
+```
+
+终上所述，我们用一个例子下个断点记录一下完整的流程：
+```
+var test = _([1, 2, 3])
+.tap(function(array) {
+    array.pop();
+})
+.push(2)
+.value();
+// => [1,2,2]
+```
+<img src="./assets/proto.png" alt="">
+可以看到，这个时候func对应的push其实就是Array.prototype.push
 
 ## 原型挂载
-//Todo:分析原型挂载函数mixin
+之前我们在1.1提过mixin的挂载功能，现在我们来详细分析一下。
+
+让我们打个断点：
+```
+debugger
+mixin(lodash, lodash)
+```
+<img src="./assets/proto-mixin.png" alt="">
+可以看出，mixin先把object的键获取到，然后把source里对应这些键的方法名也获取到。
+
+这里有一个判断：当只传了两个参数的时候，实际上是传了object是this，source是第一个参数，options是第二个参数。
+```
+if (options == null &&
+//第二个参数不是对象或者另一种复杂情况
+  !(isObject(source) && (methodNames.length || !props.length))) {
+  options = source;
+  source = object;
+  object = this;
+  methodNames = baseFunctions(source, keys(source));
+}
+```
+<img src="./assets/proto-mixin2.png" alt="">
+
+然后开始遍历方法名，处理这些方法的\_\_chain\_\_、\_\_actions\_\_、\_\_wrapped\_\_，将这些方法挂载到object.prototype上，在我们这个例子中就是lodash.prototype上。
+
+最后，返回这个mixin完毕的object。
+
+
+

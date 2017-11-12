@@ -1,7 +1,7 @@
 # lodash代码结构
 
 ## 模块化
-新版本是使用es6语法编写代码的，直接使用了import/export进行模块化。
+新版本(5.0.0+)是使用es6语法编写代码的，直接使用了import/export进行模块化。
 以深拷贝cloneDeep为例：
 ```
 import baseClone from './.internal/baseClone.js'
@@ -10,7 +10,7 @@ function cloneDeep(value) {
 }
 export default cloneDeep
 ```
-而以往的第三方库使用立即执行函数来实现模块化的，lodash源码经过[lodash-cli](https://github.com/lodash-archive/lodash-cli)打包后同样如此。
+而以往的第三方库使用立即执行函数来实现模块化的，lodash源码经过打包后生成的文件同样如此。
 ```
 (function(){
   //content
