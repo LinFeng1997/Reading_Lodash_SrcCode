@@ -23,6 +23,13 @@
 	2.3 [原型编程](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/proto.md)
 
 2. lodash工具篇
+	
+	3.1 [判断工具](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/judgment-util.md)
+
+	3.2 [转换工具](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/conversion-util.md)
+
+	3.3 [值相关工具](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/value-util.md)
+
 2. lodash集合篇
 2. lodash数组篇
 2. lodash对象篇
@@ -59,6 +66,13 @@ Record the experience of reading the lodash source code
 	2.3 [proto programming](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/proto.md)
 
 2. lodash util
+
+	3.1 [judgment util](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/judgment-util.md)
+
+	3.2 [conversion util](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/conversion-util.md)
+
+	3.3 [value util](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/value-util.md)
+
 2. lodash collection
 2. lodash array
 2. lodash object
