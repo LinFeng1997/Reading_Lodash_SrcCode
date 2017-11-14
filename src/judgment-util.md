@@ -161,11 +161,111 @@ function has(object, path) {
 ### 复杂的判断逻辑
 //Todo:复杂的判断逻辑
 1. baseIsEqual、isEqual
+对于复杂函数，注释有助于我们充分理解它
+```
+/**
+* The base implementation of `_.isEqual` which supports partial comparisons
+* and tracks traversed objects.
+*
+* @private
+* @param {*} value The value to compare.
+* @param {*} other The other value to compare.
+* @param {boolean} bitmask The bitmask flags.
+*  1 - Unordered comparison
+*  2 - Partial comparison
+* @param {Function} [customizer] The function to customize comparisons.
+* @param {Object} [stack] Tracks traversed `value` and `other` objects.
+* @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+*/
+```
+这段的大意就是baseIsEqual是_.isEqual的实现基础，它支持部分的比较并且跟踪遍历对象。属于私有函数。
 
+传的value和other就是它要比较的两个元素，至于bitmask是一个比较啥的标志位，如果是1就无序比较，如果是2就部分比较。另外两个参数customizer和stack分别是自定义比较规则和跟踪遍历对象的栈。
+
+它是怎么工作的呢？
+```
+function baseIsEqual(value, other, bitmask, customizer, stack) {
+	//先判断全等
+	if (value === other) {
+	  return true;
+	}
+	//非对象比较、包括NaN
+	if (value == null || other == null || (!isObjectLike(value) && !isObjectLike(other))) {
+	  return value !== value && other !== other;
+	}
+	//转交给baseIsEqualDeep去判断
+	return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
+}
+```
+//Todo:分析复杂判断
 2. baseIsEqualDeep
+这就来到了baseIsEqualDeep，等于说两个非对象类型之间的比较就在baseIsEqual里比较完了。它的注释我们不必看了，因为它就是baseIsEqual的特殊版本而已，专门比较对象类型，包括数组。
+
+只不过工作流程比较麻烦：我们拿官方例子来下断点看流程：
+```
+var object = { 'a': 1 };
+var other = { 'a': 1 };
+debugger
+
+_.isEqual(object, other);
+```
+<img src="./assets/util-util-baseIsEqualDeep-1.png">
+先判断是不是数组并获取Tag->再判断Tag是否相等->初始化栈
+
+<img src="./assets/util-util-baseIsEqualDeep-2.png">
+靠栈底元素兵分两栈->总栈推入元素->相同Tag一条流程，有标志位一条流程
+
+最终进入equalObjects(equalArrays或者equalFunc)->元素出栈 
+
+>这里注明一下：equalFunc是用户自定义比较函数
 
 3. equalArrays
+由于数组是引用对象，所以不能直接判断相等，不过有间接的方法来判断：
+
+让我们先来看注释
+```
+/**
+* A specialized version of `baseIsEqualDeep` for arrays with support for
+* partial deep comparisons.
+*
+* @private
+* @param {Array} array The array to compare.
+* @param {Array} other The other array to compare.
+* @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+* @param {Function} customizer The function to customize comparisons.
+* @param {Function} equalFunc The function to determine equivalents of values.
+* @param {Object} stack Tracks traversed `array` and `other` objects.
+* @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
+*/
+```
+这就是个特殊的baseIsEqualDeep版本，从上一个分析可以看出来baseIsEqualDeep兵分三路，这一路就是针对数组的。
+
+它首先对bitmask和1(COMPARE_PARTIAL_FLAG)做了与运算，也就是只取个位。
 
 3. equalObjects
+和equalArrays类似
+
 
 3. equalByTag
+这就是一个判断同一种对象是否相等的函数，不过只能判断布尔日期数字、错误、正则字符串，full版本的更加全面一些
+```
+function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
+	switch (tag) {
+	  case boolTag:
+	  case dateTag:
+	  case numberTag:
+	    // Coerce booleans to `1` or `0` and dates to milliseconds.
+	    // Invalid dates are coerced to `NaN`.
+	    return eq(+object, +other);
+	  case errorTag:
+	    return object.name == other.name && object.message == other.message;
+	  case regexpTag:
+	  case stringTag:
+	    // Coerce regexes to strings and treat strings, primitives and objects,
+	    // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
+	    // for more details.
+	    return object == (other + '');
+	}
+	return false;
+}
+```
