@@ -209,10 +209,10 @@ debugger
 
 _.isEqual(object, other);
 ```
-<img src="./assets/util-util-baseIsEqualDeep-1.png">
+<img src="./assets/util-baseIsEqualDeep-1.png">
 先判断是不是数组并获取Tag->再判断Tag是否相等->初始化栈
 
-<img src="./assets/util-util-baseIsEqualDeep-2.png">
+<img src="./assets/util-baseIsEqualDeep-2.png">
 靠栈底元素兵分两栈->总栈推入元素->相同Tag一条流程，有标志位一条流程
 
 最终进入equalObjects(equalArrays或者equalFunc)->元素出栈 
@@ -220,31 +220,35 @@ _.isEqual(object, other);
 >这里注明一下：equalFunc是用户自定义比较函数
 
 3. equalArrays
-由于数组是引用对象，所以不能直接判断相等，不过有间接的方法来判断：
+由于数组是引用对象，所以也不能直接判断相等。
 
 让我们先来看注释
 ```
 /**
 * A specialized version of `baseIsEqualDeep` for arrays with support for
 * partial deep comparisons.
-*
-* @private
-* @param {Array} array The array to compare.
-* @param {Array} other The other array to compare.
-* @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
-* @param {Function} customizer The function to customize comparisons.
-* @param {Function} equalFunc The function to determine equivalents of values.
-* @param {Object} stack Tracks traversed `array` and `other` objects.
-* @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
 */
 ```
-这就是个特殊的baseIsEqualDeep版本，从上一个分析可以看出来baseIsEqualDeep兵分三路，这一路就是针对数组的。
+这就是个特殊的baseIsEqualDeep版本，从上一个分析可以看出来baseIsEqualDeep兵分三路，这一路就是针对数组的。改一下例子：
+```
+var object =[1,2];
+var other = [1,2];
+_.isEqual(object, other);
+```
+<img src="./assets/equalArrays.png">
 
-它首先对bitmask和1(COMPARE_PARTIAL_FLAG)做了与运算，也就是只取个位。
+它首先对bitmask和1(COMPARE_PARTIAL_FLAG)做了与运算，也就是只取个位。然后获取两个数组的长度，针对部分比较进行处理后开始遍历两个数组的值。
+<img src="./assets/equalArrays.png">
+接着就出现了三种情况：有compared、seen为真、其他一般情况。
+第一种情况如果compared的布尔运算表达式为真就continue，否则返回false，第二种情况seen是部分比较的处理，这个例子没有涉及，第三种情况就是直接比较两个值。
 
 3. equalObjects
-和equalArrays类似
+和equalArrays类似，是baseIsEqualDeep的另一条支线
+<img src="./assets/equalObjects.png">
+先通过key获取长度，比较完长度再比较值
 
+<img src="./assets/equalObjects2.png">
+这里比较了每个键值，并且会跳过constructor的比较，如果没跳过就还会比较对象的原型
 
 3. equalByTag
 这就是一个判断同一种对象是否相等的函数，不过只能判断布尔日期数字、错误、正则字符串，full版本的更加全面一些
