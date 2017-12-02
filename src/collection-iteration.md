@@ -35,7 +35,7 @@ var baseEach = createBaseEach(baseForOwn);
 baseEach这里也很有趣，使用了createBaseEach和baseForOwn来生成函数，由此我可以有一个大胆的猜测，那就是createBaseEach肯定还生成了别的函数，一翻源码，果然在full版本的源码里发现了baseEachRight也是由createBaseEach生成的。
 
 我们拿数组的那个用例给createBaseEach打个断点：
-<img src="./assets/createBaseEach.png" alt="">
+<img src="../assets/createBaseEach.png" alt="">
 发现它根据collection的值建立了三条分支：
 1. 为空直接返回
 2. 不是类数组(也就是是个对象)调用eachFunc，也就是这个例子的baseForOwn
@@ -51,7 +51,7 @@ function baseForOwn(object, iteratee) {
 var baseFor = createBaseFor();
 ```
 我们这次换对象用例看看createBaseFor怎么运行的：
-<img src="./assets/createBaseFor.png" alt="">
+<img src="../assets/createBaseFor.png" alt="">
 很明显，它和createBaseEach类似，只不过专门用来处理对象，也是开一个while循环调用iteratee函数，只是参数对应着是值、键、集合本身了
 
 ### map-baseMap
@@ -87,7 +87,7 @@ function map(collection, iteratee) {
 
 #### baseMap实现
 这次我们打个断点来看：
-<img src="./assets/baseMap.png" alt="">
+<img src="../assets/baseMap.png" alt="">
 很明显baseMap是借用了baseEach实现的，这次都不需要自己判断是对象还是数组了，只需要初始化一个result数组用来存放每个被映射的元素就好了。
 
 ### baseFilter-filter
@@ -100,7 +100,7 @@ function filter(collection, predicate) {
 仍旧是熟悉的味道，这不过这次iteratee换成了predicate
 
 #### baseFilter实现
-<img src="./assets/baseMap.png" alt="">
+<img src="../assets/baseMap.png" alt="">
 baseFilter比baseMap的实现简单，仍然是有一个result数组用来存放结果，只不过这次只存通过predicate检验的元素了。
 
 ### reduce-baseReduce
@@ -119,7 +119,7 @@ _.reduce([1, 2], function(sum, n) {
 }, 0);
 // => 3
 ```
-<img src="./assets/baseReduce.png" alt="">
+<img src="../assets/baseReduce.png" alt="">
 首先，accumulator对应着形参accumulator累加器、arguments.length < 3对应着initAccum是否有初始累加器、baseEach对应着eachFunc遍历函数。它们分别被用于：存储累加结果、存储累加器初始值、遍历当前集合。
 我们再看遍历函数体有一个三元表达式，用来处理有初始累加值和没有的情况：如果没有初始值就拿集合的第一个值作为初始值。
 
