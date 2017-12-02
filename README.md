@@ -31,6 +31,9 @@
 	3.3 [值相关工具](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/value-util.md)
 
 2. lodash集合篇
+	
+	4.1 [迭代系列](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/collection-iteration.md)
+
 2. lodash数组篇
 2. lodash对象篇
 2. lodash函数篇
@@ -74,6 +77,9 @@ Record the experience of reading the lodash source code
 	3.3 [value util](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/value-util.md)
 
 2. lodash collection
+
+	4.1 [collection-iteration](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/collection-iteration.md)
+	
 2. lodash array
 2. lodash object
 2. lodash function
