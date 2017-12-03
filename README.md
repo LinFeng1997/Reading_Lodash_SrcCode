@@ -34,6 +34,10 @@
 	
 	4.1 [迭代系列](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/collection-iteration.md)
 
+	4.2 [查询系列](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/collection-query.md)
+
+	4.3 [仿sql系列](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/collection-imitate-sql.md)
+
 2. lodash数组篇
 2. lodash对象篇
 2. lodash函数篇
@@ -79,11 +83,17 @@ Record the experience of reading the lodash source code
 2. lodash collection
 
 	4.1 [collection-iteration](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/collection-iteration.md)
+
+	4.2 [collection-query](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/collection-query.md)
+
+	4.3 [collection-imitate-sql](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/collection-imitate-sql.md)
+
+	
 	
 2. lodash array
 2. lodash object
 2. lodash function
-2. lodash programming paradigm
+
 
 
 ## Thanks
