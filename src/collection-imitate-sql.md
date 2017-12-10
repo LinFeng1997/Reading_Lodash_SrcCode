@@ -138,6 +138,7 @@ function baseSortBy(array, comparer) {
 
 至于compareMultiple则是一个比较复杂的比较函数了:
 <img src="../assets/compareMultiple.png" alt="">
+
 它可以比较两个对象，并且支持升降序比，比较标准优先是criteria属性，其次是index属性
 
 再来看看compareAscending函数：
