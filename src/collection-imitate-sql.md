@@ -121,6 +121,7 @@ _.sortBy(users, ['user', 'age']);
 2. baseOrderBy和baseSortBy是真正的排序函数：
 <img src="../assets/baseOrderBy.png" alt="">
 它先映射生成了一个新的集合,如果是数组就返回iteratee计算后的值，是对象就返回value、索引index、排序标准criteria, 方便排序。
+
 最后再通过baseSortBy对result排序：
 ```
 function baseSortBy(array, comparer) {
