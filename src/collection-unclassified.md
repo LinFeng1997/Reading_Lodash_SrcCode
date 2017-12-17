@@ -108,17 +108,86 @@ function baseSampleSize(collection, n) {
   return shuffleSelf(array, baseClamp(n, 0, array.length));
 }
 ```
-我们发现这里用到了shuffleSelf和baseClamp...
+我们发现这里用到了shuffleSelf和baseClamp 
+//Todo:继续分析shuffleSelf和baseClamp
 #### shuffle
-洗牌算法
+洗牌算法，看用例，其实就是个打乱集合的函数：
+```
+_.shuffle([1, 2, 3, 4]);
+// => [4, 1, 3, 2]
+```
+直接看实现:
+```
+function shuffle(collection) {
+  var func = isArray(collection) ? arrayShuffle : baseShuffle;
+  return func(collection);
+}
+```
+关键点在于arrayShuffle和baseShuffle：
+```
+function arrayShuffle(array) {
+  return shuffleSelf(copyArray(array));
+}
+function baseShuffle(collection) {
+  return shuffleSelf(values(collection));
+}
+```
+很明显，最后的归宿都是shuffleSelf，只不过对象会被转成一个值数组
+```
+function shuffleSelf(array, size) {
+  var index = -1,
+    length = array.length,
+    lastIndex = length - 1;
+
+  size = size === undefined ? length : size;
+  while (++index < size) {
+    var rand = baseRandom(index, lastIndex),
+      value = array[rand];
+
+    array[rand] = array[index];
+    array[index] = value;
+  }
+  array.length = size;
+  return array;
+}
+```
+这个函数很简单，就是生成一个随机的索引，然后和数组原本索引对应的值顺序交换。
 
 ### 其他
 
 #### invokeMap
-invoke和map的结合函数
+看用例，它是个invoke和map的结合函数：
+```
+_.invokeMap([[5, 1, 7], [3, 2, 1]], 'sort');
+// => [[1, 5, 7], [1, 2, 3]]
+```
+具体过程大家应该可以猜到，那就是遍历集合然后调用相关函数，实现的话留给大家自己看了~
 
 #### partition
-一分集合为二的函数
+看用例，它是个一分集合为二的函数
+```
+var users = [
+  { 'user': 'barney',  'age': 36, 'active': false },
+  { 'user': 'fred',    'age': 40, 'active': true },
+  { 'user': 'pebbles', 'age': 1,  'active': false }
+];
+ 
+_.partition(users, function(o) { return o.active; });
+// => objects for [['fred'], ['barney', 'pebbles']]
+```
+一个集合是符合条件的，另一个是不符合条件的，不知道大家有没有想起filter和reject？
+我们来看看实现：
+```
+var partition = createAggregator(function(result, value, key) {
+  result[key ? 0 : 1].push(value);
+}, function() {
+  return [
+    [],
+    []
+  ];
+});
+```
+可以发现它和sql系列的函数用了同一个辅助函数：createAggregator，而这个函数是负责将元素分类的，自然就将一个集合一分为二了。
 
 #### size
 看用例，它是个查看集合元素个数的函数：
