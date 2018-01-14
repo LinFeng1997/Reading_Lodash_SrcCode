@@ -41,6 +41,15 @@
 	4.4 [未分类系列](https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/collection-unclassified.md)
 
 2. lodash数组篇
+	
+	5.1 [增删改查] (https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/array-crud.md)
+
+	5.2 [数组运算] (https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/array-operation.md)
+
+	5.3 [递归] (https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/array-recursion.md)
+
+	5.4 [奇技淫巧] (https://github.com/LinFengYnu/Reading_Lodash_SrcCode/blob/master/src/array-awesome.md)
+	
 2. lodash对象篇
 2. lodash函数篇
 
